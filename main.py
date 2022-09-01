@@ -1,3 +1,4 @@
+from ast import parse
 import pathlib
 import configparser
 import shutil
@@ -40,16 +41,21 @@ with open(f".out/media.lua", encoding="utf-8", mode="w") as definition:
             definition_lines = ""
             text_lines = ""
             line_num = 0
+
             # Collect definition and text lines.
             for line in media["lines"].split("\n"):
                 if not line:
                     continue
                 line_num += 1
 
-                definition_lines += f'    {{ text = "RM_UAMEDIA_{category.name}{id}_{line_num}", r = 0.0, g = 0.6, b = 0.4, codes = "BOR-1" }},\n'
+                parsed_line = line.split("|")
+                line_text = parsed_line[0]
+                line_codes = parsed_line[1] if len(parsed_line) > 1 else ""
+
+                definition_lines += f'    {{ text = "RM_UAMEDIA_{category.name}{id}_{line_num}", r = 0.0, g = 0.6, b = 0.4, codes = "{line_codes}" }},\n'
 
                 text_line_decor = "[img=music]" if category == Category.CD else ""
-                text_lines += f'RM_UAMEDIA_{category.name}{id}_{line_num} = "{text_line_decor}{line}{text_line_decor}"\n'
+                text_lines += f'RM_UAMEDIA_{category.name}{id}_{line_num} = "{text_line_decor}{line_text}{text_line_decor}"\n'
 
             # Write definition.
             definition.write(
