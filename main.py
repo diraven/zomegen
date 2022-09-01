@@ -50,7 +50,7 @@ with open(f".out/media.lua", encoding="utf-8", mode="w") as definition:
 
                 parsed_line = line.split("|")
                 line_text = parsed_line[0]
-                line_codes = parsed_line[1] if len(parsed_line) > 1 else ""
+                line_codes = parsed_line[1] if len(parsed_line) > 1 else "BOR-1"
 
                 definition_lines += f'    {{ text = "RM_UAMEDIA_{category.name}{id}_{line_num}", r = 0.0, g = 0.6, b = 0.4, codes = "{line_codes}" }},\n'
 
