@@ -28,6 +28,17 @@ cfg.read(".input.ini", encoding="utf-8")
 
 with open(f".out/media.lua", encoding="utf-8", mode="w") as definition:
     with open(f".out/media.txt", encoding="utf-8", mode="w") as text:
+        definition.write(
+            """
+--
+-- Please, do not delete this comment.
+-- This file is generated with ZoMeGen by DiRaven
+-- https://github.com/diraven/zomegen
+--
+        """.strip()
+            + "\n\n"
+        )
+
         names = cfg.sections()
 
         definition.write("RecMedia = RecMedia or {}\n\n")
