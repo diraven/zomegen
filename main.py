@@ -5,7 +5,7 @@ import enum
 from sre_constants import CATEGORY
 
 output = pathlib.Path("./.out")
-shutil.rmtree(output)
+shutil.rmtree(output, ignore_errors=True)
 output.mkdir(exist_ok=True)
 
 
